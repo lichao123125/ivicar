@@ -33,3 +33,32 @@ var homeData = {
     ...
     ]
 }
+
+//设备列表
+{
+  "data": [
+    [
+      "设备号",
+      "是否绑定车辆",
+      "最近上数时间",
+      "关联卡号",
+      "状态",
+    ],
+    [
+      "Garrett Winters",
+      "Accountant",
+      "Tokyo",
+      "8422",
+      "2011/07/25",
+    ],
+    [
+      "Ashton Cox",
+      "Junior Technical Author",
+      "San Francisco",
+      "1562",
+      "2009/01/12",
+    ],
+    [],
+    []
+  ]
+}
