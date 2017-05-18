@@ -11,19 +11,17 @@ var homeData = {
     lossDevices: '',
 
     //折线图数据
-    lineData: {
-        [{
+    lineData: [
+    	{
             //日期
             name: 'Sat Oct 04 1997 00:00:00 GMT+0800 (中国标准时间)',
             //[日期，设备数量]
             value: ['1997/10/4','100']
-        }
+        },
         {},
         {},
         ...
-        ]
-
-    },
+        ],
 
     //地图数据 [{name:"地名", value: [经度, 纬度, 车辆数目]}]
     DevicesMap: [{
