@@ -27,7 +27,7 @@
 	<div id="wrapper">
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
-			<h1>
+			<h1 class="header_1">
 				鑫洋泉运营系统
 			</h1>
 		</nav>
@@ -148,6 +148,7 @@
     [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
 ];
     $('#example').dataTable( {
+        data:dataSet,
         oLanguage: {
             "sUrl": "assets/vendor/dataTables/zh_CN.json"
         },
@@ -164,8 +165,9 @@
         null,
         null,
         null
-      ],
-        "ajax": 'assets/device_ajax.txt'
+      ]
+      
+        // "ajax": 'assets/device_ajax.txt'
     } );
 // $(document).ready(function() {
 //         $('.datatable').dataTable( {

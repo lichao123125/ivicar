@@ -10,13 +10,10 @@
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
-	<link rel="stylesheet" href="assets/vendor/chartist/css/chartist-custom.css">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
-	<!-- GOOGLE FONTS -->
-	<!--<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">-->
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
@@ -28,7 +25,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 
-			<h1>
+			<h1 class="header_1">
 				鑫洋泉运营系统
 			</h1>
 		</nav>
@@ -126,7 +123,6 @@
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-	<script src="assets/vendor/chartist/js/chartist.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script>
 		var option = null;
@@ -329,75 +325,14 @@
 				var geoCoord = geoCoordMap[data[i].name];
 				if (geoCoord) {
 					res.push({
-						name: data[i].name,
-						value: geoCoord.concat(data[i].value)
+						// name: data[i].name,
+						value: geoCoord//.concat(data[i].value)
 					});
 				}
 			}
 			return res;
 		};
-
-		option = {
-			backgroundColor: '#404a59',
-			title: {
-				text: '设备全国分配情况',
-				// subtext: 'data from PM25.in',
-				// sublink: 'http://www.pm25.in',
-				x:'center',
-				textStyle: {
-					color: '#fff'
-				}
-			},
-			tooltip: {
-				trigger: 'item',
-				formatter: function (params) {
-					return params.name + ' : ' + params.value[2];
-				}
-			},
-			legend: {
-				orient: 'vertical',
-				y: 'bottom',
-				x:'right',
-				// data:['pm2.5'],
-				textStyle: {
-					color: '#fff'
-				}
-			},
-			visualMap: {
-				min: 0,
-				max: 400,
-				calculable: true,
-				inRange: {
-					color: ['#50a3ba', '#eac736', '#d94e5d']
-				},
-				textStyle: {
-					color: '#fff'
-				}
-			},
-			geo: {
-				map: 'china',
-				label: {
-					emphasis: {
-						show: false
-					}
-				},
-				itemStyle: {
-					normal: {
-						areaColor: '#323c48',
-						borderColor: '#111'
-					},
-					emphasis: {
-						areaColor: '#2a333d'
-					}
-				}
-			},
-			series: [
-				{
-					name: 'pm2.5',
-					// type: 'heatmap',
-					type: 'scatter',
-					coordinateSystem: 'geo',
-					data: convertData([
+		var data1 = convertData([
 						{name: "海门", value: 9},
 						{name: "鄂尔多斯", value: 12},
 						{name: "招远", value: 12},
@@ -588,7 +523,68 @@
 						{name: "合肥", value: 229},
 						{name: "武汉", value: 273},
 						{name: "大庆", value: 279}
-					]),
+					]);
+		option = {
+			backgroundColor: '#404a59',
+			title: {
+				text: '设备全国分配情况',
+				// subtext: 'data from PM25.in',
+				// sublink: 'http://www.pm25.in',
+				x:'center',
+				textStyle: {
+					color: '#fff'
+				}
+			},
+			tooltip: {
+				trigger: 'item',
+				formatter: function (params) {
+					return params.name + ' : ' + params.value[2];
+				}
+			},
+			legend: {
+				orient: 'vertical',
+				y: 'bottom',
+				x:'right',
+				// data:['pm2.5'],
+				textStyle: {
+					color: '#fff'
+				}
+			},
+			visualMap: {
+				min: 0,
+				max: 400,
+				calculable: true,
+				inRange: {
+					color: ['#50a3ba', '#eac736', '#d94e5d']
+				},
+				textStyle: {
+					color: '#fff'
+				}
+			},
+			geo: {
+				map: 'china',
+				label: {
+					emphasis: {
+						show: false
+					}
+				},
+				itemStyle: {
+					normal: {
+						areaColor: '#323c48',
+						borderColor: '#111'
+					},
+					emphasis: {
+						areaColor: '#2a333d'
+					}
+				}
+			},
+			series: [
+				{
+					name: 'pm2.5',
+					// type: 'heatmap',
+					type: 'scatter',
+					coordinateSystem: 'geo',
+					data: data1,
 					symbolSize: 12,
 					label: {
 						normal: {
@@ -607,10 +603,10 @@
 				}
 			]
 		};
-		var chart = echarts.init(document.getElementById('echarts-china-map'));
-		if (option && typeof option === "object") {
-			chart.setOption(option, true);
-		}
+		// var chart = echarts.init(document.getElementById('echarts-china-map'));
+		// if (option && typeof option === "object") {
+		// 	chart.setOption(option, true);
+		// }
 
 		//line
 		function randomData() {
@@ -674,6 +670,112 @@
 		if (lineOption && typeof lineOption === "object") {
 			lineChart.setOption(lineOption, true);
 		}
+
+
+$.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData) {
+    // myChart.hideLoading();
+		var myChart = echarts.init(document.getElementById('echarts-china-map'));
+
+
+    weiboData = weiboData.map(function (serieData, idx) {
+        var px = serieData[0] / 1000;
+        var py = serieData[1] / 1000;
+        var res = [[px, py]];
+
+        for (var i = 2; i < serieData.length; i += 2) {
+            var dx = serieData[i] / 1000;
+            var dy = serieData[i + 1] / 1000;
+            var x = px + dx;
+            var y = py + dy;
+            res.push([x.toFixed(2), y.toFixed(2), 1]);
+
+            px = x;
+            py = y;
+        }
+        return res;
+    });
+    myChart.setOption(option = {
+        backgroundColor: '#404a59',
+        title : {
+            text: '',
+            subtext: 'From ThinkGIS',
+            sublink: '',
+            left: 'center',
+            top: 'top',
+            textStyle: {
+                color: '#fff'
+            }
+        },
+        tooltip: {},
+        legend: {
+            left: 'left',
+            data: ['强', '中', '弱'],
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+        geo: {
+            map: 'china',
+            label: {
+                emphasis: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                normal: {
+                    areaColor: '#323c48',
+                    borderColor: '#111'
+                },
+                emphasis: {
+                    areaColor: '#2a333d'
+                }
+            }
+        },
+        series: [{
+            name: '弱',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbolSize: 1,
+            large: true,
+            itemStyle: {
+                normal: {
+                    shadowBlur: 2,
+                    shadowColor: 'rgba(37, 140, 249, 0.8)',
+                    color: 'rgba(37, 140, 249, 0.8)'
+                }
+            },
+            data: weiboData[0]
+        }, {
+            name: '中',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbolSize: 1,
+            large: true,
+            itemStyle: {
+                normal: {
+                    shadowBlur: 2,
+                    shadowColor: 'rgba(14, 241, 242, 0.8)',
+                    color: 'rgba(14, 241, 242, 0.8)'
+                }
+            },
+            data: weiboData[1]
+        }, {
+            name: '强',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            symbolSize: 1,
+            large: true,
+            itemStyle: {
+                normal: {
+                    shadowBlur: 2,
+                    shadowColor: 'rgba(255, 255, 255, 0.8)',
+                    color: 'rgba(255, 255, 255, 0.8)'
+                }
+            },
+            data: weiboData[2]
+        }]
+    });
+});
 	
 	</script>
 </body>
