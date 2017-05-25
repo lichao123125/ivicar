@@ -59,21 +59,19 @@
 									<h3 class="panel-title">统计信息</h3>
 								</div>
 								<div class="panel-body">
-									<table class="table table-bordered">
+									<table class="table text-center table-striped">
 										<thead>
 											<tr>
-												<th>#</th>
-												<th>当前在线车辆数</th>
-												<th>已激活设备数</th>
-												<th>失联设备数</th>
+												<th class="text-center">当前在线车辆数</th>
+												<th class="text-center">已激活设备数</th>
+												<th class="text-center">失联设备数</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td>1</td>
-												<td>45345</td>
-												<td>456465</td>
-												<td>6655</td>
+												<td id ='offLineCount'></td>
+												<td id='onLineCount'></td>
+												<td id='activateStat'></td>
 											</tr>
 										</tbody>
 									</table>
@@ -126,6 +124,15 @@
 	<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
 	<script>
+	$.get('ws/0.1/stat/data', function (data) {
+		//data['offLineCount']
+		//data['onLineCount']
+		//data['activateStat']
+		$('#offLineCount')[0].innerHTML = data['offLineCount'];
+		$('#onLineCount')[0].innerHTML = data['onLineCount'];
+		$('#activateStat')[0].innerHTML = data['activateStat'];
+		
+	})
 		var option = null;
 		var geoCoordMap = {
 			"海门":[121.15,31.89],
@@ -673,12 +680,13 @@
 		}
 
 
-$.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData) {
+$.get('ws/0.1/stat/map', function (myData) {
     // myChart.hideLoading();
 		var myChart = echarts.init(document.getElementById('echarts-china-map'));
 
-
-    weiboData = weiboData.map(function (serieData, idx) {
+	myData = myData['data'];
+	console.log(myData)
+    /*weiboData = weiboData.map(function (serieData, idx) {
         var px = serieData[0] / 1000;
         var py = serieData[1] / 1000;
         var res = [[px, py]];
@@ -695,6 +703,7 @@ $.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData
         }
         return res;
     });
+	*/
     myChart.setOption(option = {
         backgroundColor: '#404a59',
         title : {
@@ -745,7 +754,7 @@ $.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData
                     color: 'rgba(37, 140, 249, 0.8)'
                 }
             },
-            data: weiboData[0]
+            data: myData
         }, {
             name: '中',
             type: 'scatter',
@@ -759,7 +768,7 @@ $.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData
                     color: 'rgba(14, 241, 242, 0.8)'
                 }
             },
-            data: weiboData[1]
+            data: myData
         }, {
             name: '强',
             type: 'scatter',
@@ -773,7 +782,7 @@ $.get('http://echarts.baidu.com/data/asset/data/weibo.json', function (weiboData
                     color: 'rgba(255, 255, 255, 0.8)'
                 }
             },
-            data: weiboData[2]
+            data: myData
         }]
     });
 });

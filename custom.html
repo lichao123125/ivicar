@@ -118,16 +118,15 @@
       length: 10,
       
         // "ajax": 'assets/device_ajax.txt'
-        "ajax": 'assets/device_ajax.txt',
-         "serverSide": true,//分页，取数据等等的都放到服务端去
-            "deferRender": true,//当处理大数据时，延迟渲染数据，有效提高Datatables处理能力
+         //"serverSide": true,//分页，取数据等等的都放到服务端去
+          //  "deferRender": true,//当处理大数据时，延迟渲染数据，有效提高Datatables处理能力
             "destory": true,
             "ajax": {
                 "dataType": 'json',
-                "type": "POST",
-                "url": "assets/custom_ajax.txt",
+                "type": "get",
+                "url": "ws/0.1/customer/datas",
                 "data": function (d) {
-                    console.log(d)
+                   //console.log(d)
                     // d.id = id;
                 },
                 "async": false
@@ -135,59 +134,30 @@
             "columns": [
                 {
                     "data": "id",
-                    // "width": "100px",
-                    "title": "设备号"
+                    "title": ""
                 }, {
                     "data": "mobile",
-                    // "width": "150px",
-                    "title": "手机",
-                    render: function (data) {
-                        return "<a href='"  + data + "'>" + data + "</a>";
-                    }
+                    "title": "手机号"
+                    
                 }, {
                     "data": "nickName",
-                    // "width": "150px",
                     "title": "昵称"
                 }, {
                     "data": "sex",
-                    // "width": "100px",
                     "title": "性别"
-                    // render: function (data, type, row, meta) {
-                        //个人理解  --以及参数的应用场景
-                        //data:当前cell的值  --主要是操作这个参数来做渲染
-                        //type:数据类型,枚举类型dt内置定义的  --用处不大
-                        //row:当前行的所有数据  --可以做来用级联(没办法更改其他cell的渲染)
-                        //meta:它下面有三个参数
-                        //   //row,col 是当前cell的横纵坐标(相对于左上角)
-                        //         --可以结合上个参数row做更加复杂的级联
-                        //   //settings:dt的api实例,动态所有的参数信息都在里面
-                           //  --这个很强大,获取参数信息就好,新手不要随便更改里面的参数信息
-                        // var node = "<label ";
-                        // if (data == "男") {
-                        //     node += "style='color:red;'"
-                        // } else if (data == "女") {
-                        //     node += "style='color:green;'"
-                        // } else {
-                        //     node += "style='color:#000;'"
-                        // }
-                        // node += ">" + data ? "" : data + "</label>"
-                        // return node;
-                        // return data
-                    // }
                  }, {
                     "data": "birthday",
-                    // "width": "150px",
                     "title": "开始日期"
                 }, {
                     "data": "created",
-                    // "width": "100px",
                     "title": "创建日期"
-                        //render 里面想引入自定义参数信息,两种方式:
-                        //一、让自定义参数的作用域大于render的作用域(全局变量、缓存等);
-                        //二、修改源码(慎用)
-                        //级联问题后面几期再讲,没有找到很好的素材
-                        // var custom = window.sessionStorage.getItem("custom");//这里就可以获取到提前存在缓存的数据
-                }
+                }, {
+					"data": "id",
+                    "title": "关联",
+					render: function (data) {
+                        return "<a href='device_detail.html?cid="  + data + "'>关联信息 </a>";
+                    }
+				}
             ]
     } );
     

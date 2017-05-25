@@ -9,6 +9,7 @@
 	<!-- VENDOR CSS -->
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/vendor/dataTables/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -37,9 +38,10 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="index.html" class=""><i class="lnr lnr-home"></i> <span>首页</span></a></li>
-                        <li><a href="device.html" class=""><i class="lnr lnr-chart-bars"></i> <span>设备</span></a></li>
-						<li><a href="device_detail.html" class="active"><i class="lnr lnr-cog"></i> <span>设备详情</span></a></li>
-                    </ul>
+						<li><a href="device.html" class=""><i class="lnr lnr-chart-bars"></i> <span>车辆信息</span></a></li>
+                        <li><a href="custom.html" class=""><i class="lnr lnr-chart-bars"></i> <span>客户信息</span></a></li>
+                        <li><a href="cards.html" class=""><i class="lnr lnr-chart-bars"></i> <span>卡信息</span></a></li>
+                   </ul>
 				</nav>
 			</div>
 		</div>
@@ -55,12 +57,15 @@
 							<!-- PANEL HEADLINE -->
 							<div class="panel panel-headline">
 								<div class="panel-heading">
-									<h3 class="panel-title">设备详情：</h3>
+									<h3 class="panel-title">关联车辆详情：</h3>
 									<!--<p class="panel-subtitle">Panel to display most important information</p>-->
 								</div>
 								<div class="panel-body">
-									<h4>Panel Content</h4>
-									<p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+									<div class="row">
+										<table id="vehicle" class="col-md-12 display" cellspacing="0" width="100%">
+											
+										</table>
+									</div>
 								</div>
 							</div>
 							<!-- END PANEL HEADLINE -->
@@ -71,12 +76,15 @@
 							<!-- PANEL HEADLINE -->
 							<div class="panel panel-headline">
 								<div class="panel-heading">
-									<h3 class="panel-title">关联用户信息：</h3>
+									<h3 class="panel-title">关联客户信息：</h3>
 									<!--<p class="panel-subtitle">Panel to display most important information</p>-->
 								</div>
 								<div class="panel-body">
-									<h4>Panel Content</h4>
-									<p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+									<div class="row">
+										<table id="customer" class="col-md-12 display" cellspacing="0" width="100%">
+											
+										</table>
+									</div>
 								</div>
 							</div>
 							<!-- END PANEL HEADLINE -->
@@ -91,8 +99,11 @@
 									<!--<p class="panel-subtitle">Panel to display most important information</p>-->
 								</div>
 								<div class="panel-body">
-									<h4>Panel Content</h4>
-									<p>Objectively network visionary methodologies via best-of-breed users. Phosfluorescently initiate go forward leadership skills before an expanded array of infomediaries. Monotonectally incubate web-enabled communities rather than process-centric.</p>
+									<div class="row">
+										<table id="simInfo" class="col-md-12 display" cellspacing="0" width="100%">
+											
+										</table>
+									</div>
 								</div>
 							</div>
 							<!-- END PANEL HEADLINE -->
@@ -109,7 +120,153 @@
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/vendor/dataTables/jquery.dataTables.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
+	<script>
+		var thisURL = document.URL;
+		var getVal = thisURL.split('?')[1];
+		var ajax = 'ws/0.1/customer/cvs?'+ getVal; //?cid=1'
+		$.get(ajax, function (data) {
+			var customer = [];
+			$('#customer').DataTable( {
+				sdata: data['customer'],
+				oLanguage: {
+					"sUrl": "assets/vendor/dataTables/zh_CN.json"
+				},
+				info: false,
+				//关闭行数选择
+				"lengthChange": false,
+				//关闭本地搜索
+				"searching": false,
+				"columnDefs": [
+					{
+						"targets": [0],
+						"visible": false,
+						"searchable": false
+					}
+				],
+				"columns": [
+					{
+						//"data": "id",
+						"title": ""
+					}, {
+						//"data": "mobile",
+						"title": "手机号"
+					}, {
+						//"data": "nickName",
+						"title": "昵称"
+					}, {
+						//"data": "sex",
+						"title": "性别"
+					 }, {
+						//"data": "birthday",
+						"title": "开始日期"
+					}, {
+						//"data": "created",
+						"title": "创建日期"
+					}
+				]
+			});
+			$('#vehicle').DataTable( {
+				data: data['vehicle'],
+				oLanguage: {
+					"sUrl": "assets/vendor/dataTables/zh_CN.json"
+				},
+				info: false,
+				//关闭行数选择
+				"lengthChange": false,
+				//关闭本地搜索
+				"searching": false,
+				"columnDefs": [
+					{
+						"targets": [0],
+						"visible": false,
+						"searchable": false
+					}
+				],
+				"columns": [
+				{
+                    //"data": "vid",
+                    "title": ''
+                }, {
+                    //"data": "name",
+                    "width": "100px",
+                    "title": "车名"
+                }, {
+                    //"data": "serial",
+                    "width": "150px",
+                    "title": "设备编号"
+                }, {
+                    //"data": "plate",
+                    "width": "100px",
+                    "title": "车牌"
+                }, {
+                    //"data": "vin",
+                    "width": "300px",
+                    "title": "大驾号"
+                },{
+                    //"data": "ein",
+                    "width": "300px",
+                    "title": "发动机编号"
+                },{
+                    //"data": "created",
+                    "width": "300px",
+                    "title": "创建日期"
+                }
+            ]
+			});
+			$('#simInfo').DataTable( {
+				data: data['simInfo'],
+				paging: false,
+				oLanguage: {
+					"sUrl": "assets/vendor/dataTables/zh_CN.json"
+				},
+				info: false,
+				//关闭行数选择
+				"lengthChange": false,
+				//关闭本地搜索
+				"searching": false,
+				"columns": [
+
+                {
+                    //"data": "iccid",
+					"width": "100px",
+                    "title": '卡号'
+                }, {
+                    //"data": "userCode",
+					"width": "100px",
+                    "title": "手机号"
+                }, {
+                    //"data": "operator",
+                    "width": "100px",
+                    "title": "运营商"
+                }, {
+                    //"data": "carStatus",
+                    "width": "200px",
+                    "title": "卡状态"
+                }, {
+                    //"data": "smsStatus",
+                    "width": "300px",
+                    "title": "短信通知状态"
+                },{
+                    //"data": "effectTime",
+                    "width": "300px",
+                    "title": "激活时间"
+                },{
+                    //"data": "orgId",
+                    "width": "300px",
+                    "title": "机构ID"
+                },{
+                    //"data": "created",
+                    "width": "300px",
+                    "title": "创建时间"
+                }
+            ]
+			});
+			
+		})
+		
+	</script>
 </body>
 
 </html>
