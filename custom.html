@@ -54,13 +54,13 @@
 				<div class="container-fluid">
                     <div class="row">
                         <div class="col-md-8">
-					            <h3 class="page-title ">设备列表</h3>
+					            <h3 class="page-title ">客户列表</h3>
                         </div>
                         <div class="col-md-4">
                             <!--<form class="navbar-form navbar-right">-->
                                 <form>
                                 <div class="input-group">
-                                    <input type="text" value="" class="form-control" placeholder="设备号">
+                                    <input type="text" value="" class="form-control" placeholder="手机号">
                                     <span class="input-group-btn"><button type="button" class="btn btn-primary">查询</button></span>
                                 </div>
                             </form>
@@ -69,26 +69,6 @@
 
                     <div class="row">
                         <table id="example" class="col-md-12 display" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>设备号</th>
-                                    <th>是否绑定车辆</th>
-                                    <th>最近上数时间</th>
-                                    <th>关联卡号</th>
-                                    <th>状态</th>
-                                    <!--<th>Salary</th>-->
-                                </tr>
-                            </thead>
-                            <!--<tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Extn.</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>-->
                         </table>
 					</div>
 				</div>
@@ -111,46 +91,7 @@
     <script src="assets/vendor/dataTables/jquery.dataTables.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
     <script>
-    var dataSet = [
-    [ "Tiger Nixon", "System Architect", "Edinburgh", "5421", "2011/04/25", "$320,800" ],
-    [ "Garrett Winters", "Accountant", "Tokyo", "8422", "2011/07/25", "$170,750" ],
-    [ "Ashton Cox", "Junior Technical Author", "San Francisco", "1562", "2009/01/12", "$86,000" ],
-    [ "Cedric Kelly", "Senior Javascript Developer", "Edinburgh", "6224", "2012/03/29", "$433,060" ],
-    [ "Airi Satou", "Accountant", "Tokyo", "5407", "2008/11/28", "$162,700" ],
-    [ "Brielle Williamson", "Integration Specialist", "New York", "4804", "2012/12/02", "$372,000" ],
-    [ "Herrod Chandler", "Sales Assistant", "San Francisco", "9608", "2012/08/06", "$137,500" ],
-    [ "Rhona Davidson", "Integration Specialist", "Tokyo", "6200", "2010/10/14", "$327,900" ],
-    [ "Colleen Hurst", "Javascript Developer", "San Francisco", "2360", "2009/09/15", "$205,500" ],
-    [ "Sonya Frost", "Software Engineer", "Edinburgh", "1667", "2008/12/13", "$103,600" ],
-    [ "Jena Gaines", "Office Manager", "London", "3814", "2008/12/19", "$90,560" ],
-    [ "Quinn Flynn", "Support Lead", "Edinburgh", "9497", "2013/03/03", "$342,000" ],
-    [ "Charde Marshall", "Regional Director", "San Francisco", "6741", "2008/10/16", "$470,600" ],
-    [ "Haley Kennedy", "Senior Marketing Designer", "London", "3597", "2012/12/18", "$313,500" ],
-    [ "Tatyana Fitzpatrick", "Regional Director", "London", "1965", "2010/03/17", "$385,750" ],
-    [ "Michael Silva", "Marketing Designer", "London", "1581", "2012/11/27", "$198,500" ],
-    [ "Paul Byrd", "Chief Financial Officer (CFO)", "New York", "3059", "2010/06/09", "$725,000" ],
-    [ "Gloria Little", "Systems Administrator", "New York", "1721", "2009/04/10", "$237,500" ],
-    [ "Bradley Greer", "Software Engineer", "London", "2558", "2012/10/13", "$132,000" ],
-    [ "Dai Rios", "Personnel Lead", "Edinburgh", "2290", "2012/09/26", "$217,500" ],
-    [ "Jenette Caldwell", "Development Lead", "New York", "1937", "2011/09/03", "$345,000" ],
-    [ "Yuri Berry", "Chief Marketing Officer (CMO)", "New York", "6154", "2009/06/25", "$675,000" ],
-    [ "Caesar Vance", "Pre-Sales Support", "New York", "8330", "2011/12/12", "$106,450" ],
-    [ "Doris Wilder", "Sales Assistant", "Sidney", "3023", "2010/09/20", "$85,600" ],
-    [ "Angelica Ramos", "Chief Executive Officer (CEO)", "London", "5797", "2009/10/09", "$1,200,000" ],
-    [ "Gavin Joyce", "Developer", "Edinburgh", "8822", "2010/12/22", "$92,575" ],
-    [ "Jennifer Chang", "Regional Director", "Singapore", "9239", "2010/11/14", "$357,650" ],
-    [ "Brenden Wagner", "Software Engineer", "San Francisco", "1314", "2011/06/07", "$206,850" ],
-    [ "Fiona Green", "Chief Operating Officer (COO)", "San Francisco", "2947", "2010/03/11", "$850,000" ],
-    [ "Shou Itou", "Regional Marketing", "Tokyo", "8899", "2011/08/14", "$163,000" ],
-    [ "Michelle House", "Integration Specialist", "Sidney", "2769", "2011/06/02", "$95,400" ],
-    [ "Suki Burks", "Developer", "London", "6832", "2009/10/22", "$114,500" ],
-    [ "Prescott Bartlett", "Technical Author", "London", "3606", "2011/05/07", "$145,000" ],
-    [ "Gavin Cortez", "Team Leader", "San Francisco", "2860", "2008/10/26", "$235,500" ],
-    [ "Martena Mccray", "Post-Sales support", "Edinburgh", "8240", "2011/03/09", "$324,050" ],
-    [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
-];
-    $('#example').dataTable( {
-        data:dataSet,
+    var table = $('#example').dataTable( {
         oLanguage: {
             "sUrl": "assets/vendor/dataTables/zh_CN.json"
         },
@@ -162,40 +103,95 @@
         "searching": false,
         //关系列排序
          "columns": [
-        { "orderable": false },
-        null,
-        null,
-        null,
-        null
-      ]
+            // { "orderable": false },
+            // { "orderable": false },
+            // { "orderable": false },
+            // { "orderable": false },
+            // { "orderable": false },
+        ],
+        "columnDefs": [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+        ],
+      length: 10,
       
         // "ajax": 'assets/device_ajax.txt'
+        "ajax": 'assets/device_ajax.txt',
+         "serverSide": true,//分页，取数据等等的都放到服务端去
+            "deferRender": true,//当处理大数据时，延迟渲染数据，有效提高Datatables处理能力
+            "destory": true,
+            "ajax": {
+                "dataType": 'json',
+                "type": "POST",
+                "url": "assets/custom_ajax.txt",
+                "data": function (d) {
+                    console.log(d)
+                    // d.id = id;
+                },
+                "async": false
+            },
+            "columns": [
+                {
+                    "data": "id",
+                    // "width": "100px",
+                    "title": "设备号"
+                }, {
+                    "data": "mobile",
+                    // "width": "150px",
+                    "title": "手机",
+                    render: function (data) {
+                        return "<a href='"  + data + "'>" + data + "</a>";
+                    }
+                }, {
+                    "data": "nickName",
+                    // "width": "150px",
+                    "title": "昵称"
+                }, {
+                    "data": "sex",
+                    // "width": "100px",
+                    "title": "性别"
+                    // render: function (data, type, row, meta) {
+                        //个人理解  --以及参数的应用场景
+                        //data:当前cell的值  --主要是操作这个参数来做渲染
+                        //type:数据类型,枚举类型dt内置定义的  --用处不大
+                        //row:当前行的所有数据  --可以做来用级联(没办法更改其他cell的渲染)
+                        //meta:它下面有三个参数
+                        //   //row,col 是当前cell的横纵坐标(相对于左上角)
+                        //         --可以结合上个参数row做更加复杂的级联
+                        //   //settings:dt的api实例,动态所有的参数信息都在里面
+                           //  --这个很强大,获取参数信息就好,新手不要随便更改里面的参数信息
+                        // var node = "<label ";
+                        // if (data == "男") {
+                        //     node += "style='color:red;'"
+                        // } else if (data == "女") {
+                        //     node += "style='color:green;'"
+                        // } else {
+                        //     node += "style='color:#000;'"
+                        // }
+                        // node += ">" + data ? "" : data + "</label>"
+                        // return node;
+                        // return data
+                    // }
+                 }, {
+                    "data": "birthday",
+                    // "width": "150px",
+                    "title": "开始日期"
+                }, {
+                    "data": "created",
+                    // "width": "100px",
+                    "title": "创建日期"
+                        //render 里面想引入自定义参数信息,两种方式:
+                        //一、让自定义参数的作用域大于render的作用域(全局变量、缓存等);
+                        //二、修改源码(慎用)
+                        //级联问题后面几期再讲,没有找到很好的素材
+                        // var custom = window.sessionStorage.getItem("custom");//这里就可以获取到提前存在缓存的数据
+                }
+            ]
     } );
-// $(document).ready(function() {
-//         $('.datatable').dataTable( {
-//             "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0 ] }],
-//             "oLanguage": {
-//                 "sUrl": "/components/zh_CN.json"
-//             }
-//         });
-//         $('#order_table').css({background: "#e7e7e7" });
-//     } );
-// $(document).ready(function() {
-//     $('#example').DataTable( {
-//         data: dataSet,
-//         oLanguage: {
-//                 "sUrl": "assets/vendor/dataTables/zh_CN.json"
-//             },
-//         columns: [
-//             { title: "Name" },
-//             { title: "Position" },
-//             { title: "Office" },
-//             { title: "Extn." },
-//             { title: "Start date" },
-//             { title: "Salary" }
-//         ]
-//     } );
-// } );
+    
     </script>
 </body>
 

@@ -129,7 +129,7 @@
     <script src="assets/vendor/dataTables/jquery.dataTables.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
     <script>
-    $('#example').dataTable( {
+    var table = $('#example').dataTable( {
         // data:dataSet,
         oLanguage: {
             "sUrl": "assets/vendor/dataTables/zh_CN.json"
@@ -223,6 +223,7 @@
         var search_type = $('#search_type')[0];
         if(id && search_type) {
             // alert(id.value + '  _  '+ search_type.value)
+            table.ajax.url('newData.json').load()
         }
     }
     </script>
